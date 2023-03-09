@@ -31,16 +31,16 @@ class InstallADK
         $_adkpath = $this.ADKPath
         if(!(Test-Path $_adkpath))
         {
-            #ADK 2004 (19041)
-            $adkurl = "https://go.microsoft.com/fwlink/?linkid=2120254"
+            #ADK for Windows 11 22H2 (22621)
+            $adkurl = "https://go.microsoft.com/fwlink/?linkid=2196127"
             Invoke-WebRequest -Uri $adkurl -OutFile $_adkpath
         }
 
         $_adkWinPEpath = $this.ADKWinPEPath
         if(!(Test-Path $_adkWinPEpath))
         {
-            #ADK add-on (19041)
-            $adkurl = "https://go.microsoft.com/fwlink/?linkid=2120253"
+            #ADK WinPE add-on for Windows 11 22H2 (22621)
+            $adkurl = "https://go.microsoft.com/fwlink/?linkid=2196224"
             Invoke-WebRequest -Uri $adkurl -OutFile $_adkWinPEpath
         }
         #Install DeploymentTools
