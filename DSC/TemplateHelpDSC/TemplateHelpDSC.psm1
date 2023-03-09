@@ -163,7 +163,7 @@ class InstallAndConfigWSUS
         Write-Verbose "Finished installing WSUS..."
 
         Write-Verbose "Starting the postinstall for WSUS..."
-        sl "C:\Program Files\Update Services\Tools"
+        Set-Location "C:\Program Files\Update Services\Tools"
         .\wsusutil.exe postinstall CONTENT_DIR=C:\WSUS
         Write-Verbose "Finished the postinstall for WSUS"
     }
@@ -803,7 +803,7 @@ class SetDNS
     [void] Set()
     {
         $_DNSIPAddress = $this.DNSIPAddress
-        $dnsset = Get-DnsClientServerAddress | %{$_ | ?{$_.InterfaceAlias.StartsWith("Ethernet") -and $_.AddressFamily -eq 2}}
+        $dnsset = Get-DnsClientServerAddress | ForEach-Object{$_ | Where-Object{$_.InterfaceAlias.StartsWith("Ethernet") -and $_.AddressFamily -eq 2}}
         Write-Verbose "Set dns: $_DNSIPAddress for $($dnsset.InterfaceAlias)"
         Set-DnsClientServerAddress -InterfaceIndex $dnsset.InterfaceIndex -ServerAddresses $_DNSIPAddress
     }
@@ -811,7 +811,7 @@ class SetDNS
     [bool] Test()
     {
         $_DNSIPAddress = $this.DNSIPAddress
-        $dnsset = Get-DnsClientServerAddress | %{$_ | ?{$_.InterfaceAlias.StartsWith("Ethernet") -and $_.AddressFamily -eq 2}}
+        $dnsset = Get-DnsClientServerAddress | ForEach-Object{$_ | Where-Object{$_.InterfaceAlias.StartsWith("Ethernet") -and $_.AddressFamily -eq 2}}
         if($dnsset.ServerAddresses -contains $_DNSIPAddress)
         {
             return $true
