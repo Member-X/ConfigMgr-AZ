@@ -17,7 +17,7 @@
         "Premium_LRS"
       ],
       "metadata": {
-        "description": "Storage Account Type"
+        "description": "Prefix name for the Storage Account"
       }
     },
     "storagelocation":{
@@ -71,7 +71,7 @@
       ],
       "defaultValue": "Standard_B2s",
       "metadata": {
-        "description": "Size of the Virtual Machines"
+        "description": "Size of the Virtual Machines. B2 is for the DC, Site Server and Clients. DS4_V2 is for the Primary server with SQL."
       }
     },
     "adminUsername": {
