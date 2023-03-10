@@ -4,8 +4,12 @@
   "parameters": {
     "deploymentPrefix":{
       "type": "string",
+      "defaultValue": "SDA",
       "minLength": 1,
-      "maxLength": 3
+      "maxLength": 3,
+      "metadata": {
+        "description": "Storage account prefix"
+      }
     },
     "storageAccountType": {
       "type": "string",
