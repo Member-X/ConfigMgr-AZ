@@ -134,7 +134,10 @@
       "virtualMachinesIPAddress": "10.0.0.",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), 'default')]",
       "privateIPAllocationMethod": "Static",
-      "publicIpAllocationMethod": "Dynamic"
+      "publicIpAllocationMethod": "Dynamic",
+      "metadata": {
+        "description": "The domain name is SDA.local "
+      }
     },
     "securityGroupRuleName": "default-allow-rdp",
     "securityGroupRule": {
