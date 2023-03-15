@@ -248,7 +248,7 @@
             },
             "dataDisks": [
               {
-                  "name": "datadisk1",
+                  "name": "[concat('datadisk-'), uniqueString('vmInfo.name')]",
                   "diskSizeGB": 1023,
                   "lun": 0,
                   "createOption": "Empty"
