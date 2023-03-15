@@ -248,7 +248,7 @@
             },
             "dataDisks": [
               {
-                  "name": "[concat('datadisk-'), uniqueString('vmInfo.name')]",
+                  "name": "[concat(toLower(parameters('prefix')),toLower(if(less(copyIndex(),length(variables('vmInfo'))),variables('vmInfo')[variables('vmRole')[copyIndex()]].name,if(greaterOrEquals(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo')))),variables('clientInfo')[sub(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo'))))][variables('clientRole')[sub(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo'))))]].name,variables('siteInfo')[variables('siteRole')[sub(copyIndex(),length(variables('vmInfo')))]].name))), '-datadisk')]",
                   "diskSizeGB": 1023,
                   "lun": 0,
                   "createOption": "Empty"
