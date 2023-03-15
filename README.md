@@ -33,6 +33,22 @@ This template deploys the latest Microsoft Endpoint Configuration Manager (Confi
 * A remote site system server to host managemenent point and distribution point
 * Windows 11 client(s)
 
+## Updated
+The following is a list of items updated from the original template.
+
+* Added a storage account
+* Updated the ADK version
+* Increased the number of deployable clients
+* Update the VM size of the primary server
+  * Increased the size of the OS disk to 512GB
+  
+## Stilling working on
+The following is a list of items that still need implementation
+
+* Add a managed disk to Primary and site servers
+  * Format and mount the disk
+* Download all required applications to storage account
+
 Each VM has its own public IP address and is added to a subnet protected with a Network Security Group, which only allows RDP port from Internet.
 
 Each VM has a private network IP which is for ConfigMgr communication.
