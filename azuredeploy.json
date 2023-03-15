@@ -219,6 +219,7 @@
           "count": "[add(add(length(variables('vmInfo')),length(variables('siteInfo'))),length(variables('clientRole')))]"
         },
         "dependsOn": [
+          "[resourceId('Microsoft.storageAccounts/' variables('uniqueSAName'))]",
           "[resourceId('Microsoft.Network/networkInterfaces/',concat(toLower(parameters('prefix')),toLower(if(less(copyIndex(),length(variables('vmInfo'))),variables('vmInfo')[variables('vmRole')[copyIndex()]].name,if(greaterOrEquals(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo')))),variables('clientInfo')[sub(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo'))))][variables('clientRole')[sub(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo'))))]].name,variables('siteInfo')[variables('siteRole')[sub(copyIndex(),length(variables('vmInfo')))]].name))),'-ni'))]"
         ],
         "properties": {
@@ -245,7 +246,15 @@
                 "storageAccountType": "[if(less(copyIndex(),length(variables('vmInfo'))),variables('vmInfo')[variables('vmRole')[copyIndex()]].disktype,if(greaterOrEquals(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo')))),variables('clientInfo')[sub(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo'))))][variables('clientRole')[sub(copyIndex(),add(length(variables('vmInfo')),length(variables('siteInfo'))))]].disktype,variables('siteInfo')[variables('siteRole')[sub(copyIndex(),length(variables('vmInfo')))]].disktype))]"
               },
               "diskSizeGB": 512
-            }
+            },
+            "dataDisks": [
+              {
+                  "name": "datadisk1",
+                  "diskSizeGB": 1023,
+                  "lun": 0,
+                  "createOption": "Empty"
+              }
+            ]
           },
           "networkProfile": {
             "networkInterfaces": [
