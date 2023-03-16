@@ -45,9 +45,10 @@ The following is a list of items updated from the original template.
 ## Stilling working on
 The following is a list of items that still need implementation
 
-* Add a managed disk to Primary and site servers
+* Add a managed disk to Primary and site servers - Done
   * Format and mount the disk
 * Download all required applications to storage account
+* Correct the format size of OS drive
 
 Each VM has its own public IP address and is added to a subnet protected with a Network Security Group, which only allows RDP port from Internet.
 
