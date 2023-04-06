@@ -32,6 +32,7 @@ class InstallADK
         if(!(Test-Path $_adkpath))
         {
             #ADK for Windows 11 22H2 (22621)
+            #Modify this to pull from the storage account
             $adkurl = "https://go.microsoft.com/fwlink/?linkid=2196127"
             Invoke-WebRequest -Uri $adkurl -OutFile $_adkpath
         }
@@ -40,10 +41,12 @@ class InstallADK
         if(!(Test-Path $_adkWinPEpath))
         {
             #ADK WinPE add-on for Windows 11 22H2 (22621)
+            #Modify this to pull from the storage account
             $adkurl = "https://go.microsoft.com/fwlink/?linkid=2196224"
             Invoke-WebRequest -Uri $adkurl -OutFile $_adkWinPEpath
         }
         #Install DeploymentTools
+        #Modify this to pull from the storage account
         $adkinstallpath = "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools"
         while(!(Test-Path $adkinstallpath))
         {
@@ -162,6 +165,7 @@ class InstallAndConfigWSUS
         Install-WindowsFeature -Name UpdateServices,UpdateServices-WidDB -IncludeManagementTools
         Write-Verbose "Finished installing WSUS..."
 
+        #Modify this to install to the data drive
         Write-Verbose "Starting the postinstall for WSUS..."
         Set-Location "C:\Program Files\Update Services\Tools"
         .\wsusutil.exe postinstall CONTENT_DIR=C:\WSUS
@@ -527,6 +531,7 @@ class DownloadSCCM
         $cmpath = "c:\$_CM.exe"
         $cmsourcepath = "c:\$_CM"
 
+        #Modify this to pull from the storage account
         Write-Verbose "Downloading SCCM installation source..."
         $cmurl = "https://go.microsoft.com/fwlink/?linkid=2093192"
         $WebClient = New-Object System.Net.WebClient
@@ -664,7 +669,7 @@ class InstallMP
         New-PSDrive -Name $this.SiteCode -PSProvider CMSite -Root $ProviderMachineName @initParams
         while((Get-PSDrive -Name $this.SiteCode -PSProvider CMSite -ErrorAction SilentlyContinue) -eq $null) 
         {
-            Write-Verbose "Failed ,retry in 10s. Please wait."
+            Write-Verbose "Failed, retry in 10s. Please wait."
             Start-Sleep -Seconds 10
             New-PSDrive -Name $this.SiteCode -PSProvider CMSite -Root $ProviderMachineName @initParams
         }
